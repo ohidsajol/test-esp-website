@@ -29,11 +29,15 @@
   </style>
 </head>
 <body>
-  <h1>ESP32 Touch Sensor Live Data</h1>
+  <h1>ESP32 Touch Sensor Live Data and LED control</h1>
   <div class="card">
-    <p><strong>Topic:</strong> esp32/touch</p>
-    <div id="value">--</div>
-  </div>
+  <p><strong>Topic:</strong> esp32/touch</p>
+  <div id="value">--</div>
+  <hr>
+  <h3>LED Control</h3>
+  <button onclick="toggleLED('ON')">Turn ON</button>
+  <button onclick="toggleLED('OFF')">Turn OFF</button>
+</div>
 
   <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
   <script>
@@ -60,6 +64,9 @@
     client.on('error', (err) => {
       console.error('Connection error:', err);
     });
+    function toggleLED(state) {
+  client.publish('esp32/led', state);
+}
   </script>
 </body>
 </html>
